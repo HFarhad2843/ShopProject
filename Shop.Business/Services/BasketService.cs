@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Shop.Business.Services;
 
-namespace Shop.Business.Services
+public class BasketService
 {
-    internal class Class10
-    {
-    }
 }
