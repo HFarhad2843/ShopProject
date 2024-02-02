@@ -6,4 +6,5 @@ public class Basket:BaseEntities
 {
     public int UserId { get; set; }
     public User User { get; set; }
+    public ICollection<BasketProduct> BasketProducts { get; set;}
 }

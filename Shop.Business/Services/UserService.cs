@@ -7,9 +7,15 @@ namespace Shop.Business.Services
     public class UserService : IUserService
     {
         AppDbContext appDbContext = new AppDbContext(); 
-        public void Create(User user)
+        public void Register(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            appDbContext.users.Add(user);
+            appDbContext.SaveChanges();
+
         }
 
         public void Delete(int id)

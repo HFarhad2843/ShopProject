@@ -10,4 +10,5 @@ public class Invoice : BaseEntities
     public DateTime InvoiceDate { get; set; }
     public decimal TotalPrice { get; set; }
     public string PaymentMethod { get; set; }
+    public ICollection<ProductInvoice> ProductInvoices { get; set; }
 }

@@ -4,7 +4,7 @@ namespace Shop.Business.Interfaces
 {
     public interface IUserService
     {
-        void Create(User user);
+        void Register(User user);
         void Delete(int id);
         void ShowAll();
         void SearchUser(string Name);
