@@ -11,6 +11,13 @@ public class BasketProductService : IBasketProductService
 
     public void AddBasketProduct(int ProductId,int Quantity, int UserId)
     {
+        Product product =new Product();
+        product=appDbContext.products.Where(x=>x.Id== ProductId).FirstOrDefault(); 
+        if (product.Quantity < Quantity)
+        {
+            throw new Exception("Bu məhsuldan siz istediyiniz sayda  stokda yoxdur.");
+        }
+
         Basket basket=appDbContext.baskets.Where(x=>x.UserId== UserId).FirstOrDefault();
         BasketProduct basketProduct = new BasketProduct();
         basketProduct.ProductId = ProductId;
@@ -36,7 +43,7 @@ public class BasketProductService : IBasketProductService
     public void GetUserBasketProducts(int UserId)
     {
         Basket basket = new Basket();
-        basket = appDbContext.baskets.Include(x=>x.BasketProducts).Where(x=>x.UserId==UserId && x.IsDeleted==false).FirstOrDefault();
+        basket = appDbContext.baskets.Include(x=>x.BasketProducts).ThenInclude(x=>x.Product).Where(x=>x.UserId==UserId && x.IsDeleted==false).FirstOrDefault();
         if (basket != null)
         {
             if (basket.BasketProducts != null)

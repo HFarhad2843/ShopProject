@@ -13,6 +13,7 @@ CategoryService categoryService = new();
 BrandService brandService = new();
 WalletService walletService = new();
 BasketProductService basketProductService = new();
+InvoiceService invoiceService = new();
 bool isContinue = true;
 while (isContinue)
 {
@@ -28,7 +29,11 @@ while (isContinue)
 
     Console.WriteLine("-- Account Information--\n" +
 "6 - Show all Wallets\n"+
-"7 - Add Product To Basket");
+"7 - Add Product To Basket\n"+
+"8 - Show Basket\n"+
+"9 - Create Invoice\n"+
+"10 - Show Invoices\n"+
+"11 -Pay Invoice");
 
     string? option = Console.ReadLine();
     const int MaxMenu = 21;
@@ -119,6 +124,51 @@ while (isContinue)
                         Console.WriteLine("zenbile atmaq istediyiniz mehsulun sayini secin");
                         int Quantity = Convert.ToInt32(Console.ReadLine());
                         basketProductService.AddBasketProduct(ProductId,Quantity,SessionId);
+                    }
+                    break;
+                case (int)Menu.ShowBasket:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        basketProductService.GetUserBasketProducts(SessionId);
+                    }
+                    break;
+                case (int)Menu.CreateInvoice:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hal hazirda zenbilde olan mallarin siyahisi:");
+                        basketProductService.GetUserBasketProducts(SessionId);
+
+                        Console.WriteLine("Odeme kartini secin:");
+                        walletService.GetWalletByUserId(SessionId);
+                        int walletId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Kart novunu secin:");
+                        string PaymentMethod = Console.ReadLine();
+                        var invoice = new Invoice
+                        {
+                            UserId = SessionId,
+                            WalletId = walletId,
+                            PaymentMethod= PaymentMethod
+                        };
+                        invoiceService.CreateInvoice(invoice);
+                    }
+
+                    break;
+                case (int)Menu.ShowInvoices:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        invoiceService.GetInovicesByUserId(SessionId);
                     }
                     break;
             }

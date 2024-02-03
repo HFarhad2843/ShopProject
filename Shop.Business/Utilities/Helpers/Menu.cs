@@ -10,5 +10,8 @@ public enum Menu
     ShowAllBrands =4,
     ShowAllProducts=5,
     ShowAllWallets=6,
-    AddBasketProduct=7
+    AddBasketProduct=7,
+    ShowBasket=8,
+    CreateInvoice=9,
+    ShowInvoices=10
 }
