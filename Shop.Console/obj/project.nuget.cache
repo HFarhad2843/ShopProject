@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7mHTOyb4dq6HFInAw8uKGeuAp648j7erk/tWmZoUcswP+22SQ1tG21HyojPOLJYlLvKifVWYnAu6FOyiUZE9bA==",
+  "dgSpecHash": "PXAX3YMA6lzQc2RrsWfgs9xZR3JCElV+GDvVNgYhkJxlPUWbG6+8WLZJ4bdAtaEFMXY2VVdCGcqbKpIuZjOz5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\Shop.Console.csproj",
+  "projectFilePath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\Shop.Console.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pc\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Pc\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

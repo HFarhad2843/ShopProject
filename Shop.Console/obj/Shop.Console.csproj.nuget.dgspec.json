@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\Shop.Console.csproj": {}
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\Shop.Console.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\Shop.Business.csproj": {
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\Shop.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\Shop.Business.csproj",
+        "projectUniqueName": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\Shop.Business.csproj",
         "projectName": "Shop.Business",
-        "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\Shop.Business.csproj",
+        "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\Shop.Business.csproj",
         "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\obj\\",
+        "outputPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj": {
-                "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj"
+              "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj": {
+                "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj"
               },
-              "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj"
+              "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj"
               }
             }
           }
@@ -86,14 +86,14 @@
         }
       }
     },
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\Shop.Console.csproj": {
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\Shop.Console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\Shop.Console.csproj",
+        "projectUniqueName": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\Shop.Console.csproj",
         "projectName": "Shop.Console",
-        "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\Shop.Console.csproj",
+        "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\Shop.Console.csproj",
         "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Console\\obj\\",
+        "outputPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Console\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -114,11 +114,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\Shop.Business.csproj": {
-                "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Business\\Shop.Business.csproj"
+              "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\Shop.Business.csproj": {
+                "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Business\\Shop.Business.csproj"
               },
-              "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj"
+              "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj"
               }
             }
           }
@@ -168,14 +168,14 @@
         }
       }
     },
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj": {
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj",
         "projectName": "Shop.Core",
-        "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj",
+        "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj",
         "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\obj\\",
+        "outputPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -243,14 +243,14 @@
         }
       }
     },
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj": {
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj",
         "projectName": "Shop.DataAccess",
-        "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\Shop.DataAccess.csproj",
+        "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\Shop.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -271,8 +271,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj": {
-                "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj"
+              "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj": {
+                "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj"
               }
             }
           }

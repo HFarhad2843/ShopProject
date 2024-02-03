@@ -6,16 +6,23 @@ namespace Shop.Business.Services
 {
     public class UserService : IUserService
     {
-        AppDbContext appDbContext = new AppDbContext(); 
+        AppDbContext appDbContext = new AppDbContext();
         public void Register(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
-            appDbContext.users.Add(user);
-            appDbContext.SaveChanges();
-
+            User checkUser = appDbContext.users.Where(x => x.UserName == user.UserName).FirstOrDefault();
+            if (checkUser != null)
+            {
+                appDbContext.users.Add(user);
+                appDbContext.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("bu adda istifadeci movcuddur");
+            }
         }
 
         public void Delete(int id)
@@ -55,6 +62,13 @@ namespace Shop.Business.Services
             {
                 return false;
             }
+        }
+
+        public int GetUserId(string UserName, string Password)
+        {
+            User user = new User();
+            user = appDbContext.users.Where(x => x.UserName == UserName && x.Password == Password).FirstOrDefault();
+            return user.Id; 
         }
     }
 }

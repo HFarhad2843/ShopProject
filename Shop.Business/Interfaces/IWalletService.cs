@@ -2,5 +2,5 @@
 
 public interface IWalletService
 {
-
+    void GetWalletByUserId(int userId);
 }

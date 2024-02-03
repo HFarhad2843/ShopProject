@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj": {}
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj": {
+    "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj",
         "projectName": "Shop.Core",
-        "projectPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\Shop.Core.csproj",
+        "projectPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\Shop.Core.csproj",
         "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc\\source\\repos\\Solution1\\Shop.Core\\obj\\",
+        "outputPath": "C:\\Users\\Pc\\Desktop\\ShopProject\\Shop.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

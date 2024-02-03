@@ -8,5 +8,7 @@ public enum Menu
     RegisterUser=2,
     ShowAllCategories=3,
     ShowAllBrands =4,
-    ShowAllProducts=5
+    ShowAllProducts=5,
+    ShowAllWallets=6,
+    AddBasketProduct=7
 }

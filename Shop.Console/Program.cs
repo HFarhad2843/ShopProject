@@ -6,12 +6,13 @@ Console.WriteLine("Shop Project");
 Console.WriteLine();
 Console.WriteLine("Shop App Start:");
 Console.WriteLine();
-
+int SessionId = 0;
 UserService userService = new();
 ProductService productService = new();
 CategoryService categoryService = new();
 BrandService brandService = new();
-
+WalletService walletService = new();
+BasketProductService basketProductService = new();
 bool isContinue = true;
 while (isContinue)
 {
@@ -24,6 +25,10 @@ while (isContinue)
     "3 - Show all Categories\n" +
     "4 - Show all Brands\n"+
     "5 - Show all Products\n");
+
+    Console.WriteLine("-- Account Information--\n" +
+"6 - Show all Wallets\n"+
+"7 - Add Product To Basket");
 
     string? option = Console.ReadLine();
     const int MaxMenu = 21;
@@ -40,8 +45,15 @@ while (isContinue)
                      string userName = Console.ReadLine();
                     Console.WriteLine("Enter Password:");
                     string password = Console.ReadLine();
-                    if (userService.UserLogin(userName, password)) Console.WriteLine("Giriş uğurludur:");
-                    else { Console.WriteLine("Belə istifadəçi yoxdur"); }
+                    if (userService.UserLogin(userName, password))
+                    {
+                        Console.WriteLine("Giriş uğurludur:");
+                        SessionId = userService.GetUserId(userName, password);
+                    }
+                    else 
+                    { 
+                        Console.WriteLine("Belə istifadəçi yoxdur");
+                    }
                    
                     break;
                 case (int)Menu.RegisterUser:
@@ -78,11 +90,36 @@ while (isContinue)
                     break;
                 case (int)Menu.ShowAllBrands:
                     brandService.ShowAll();
-
                     break;
+
                 case (int)Menu.ShowAllProducts:
                     productService.ShowAll();
+                    break;
 
+                case (int)Menu.ShowAllWallets:
+                    if(SessionId==0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        walletService.GetWalletByUserId(SessionId);
+                    }
+                    break;
+                case (int)Menu.AddBasketProduct:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("zenbile atmaq istediyiniz mehsulun id-ni secin");
+                        int ProductId = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("zenbile atmaq istediyiniz mehsulun sayini secin");
+                        int Quantity = Convert.ToInt32(Console.ReadLine());
+                        basketProductService.AddBasketProduct(ProductId,Quantity,SessionId);
+                    }
                     break;
             }
         }
