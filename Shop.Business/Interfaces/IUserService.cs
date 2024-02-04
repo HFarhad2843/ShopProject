@@ -11,5 +11,6 @@ namespace Shop.Business.Interfaces
         void SearchUser(string Name);
         User GetUserById(int id);
         bool UserLogin (string UserName, string Password);
+        public string GetUserRole(int id);
     }
 }

@@ -14,7 +14,7 @@ namespace Shop.Business.Services
                 throw new ArgumentNullException(nameof(user));
             }
             User checkUser = appDbContext.users.Where(x => x.UserName == user.UserName).FirstOrDefault();
-            if (checkUser != null)
+            if (checkUser == null)
             {
                 appDbContext.users.Add(user);
                 appDbContext.SaveChanges();
@@ -22,6 +22,18 @@ namespace Shop.Business.Services
             else
             {
                 Console.WriteLine("bu adda istifadeci movcuddur");
+            }
+        }
+        public string GetUserRole(int id)
+        {
+            User checkUser = appDbContext.users.Where(x => x.Id==id).FirstOrDefault();
+            if (checkUser.IsAdmin == 1)
+            {
+                return "Admin";
+            }
+            else
+            {
+                return "User";
             }
         }
 

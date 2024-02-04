@@ -13,5 +13,10 @@ public enum Menu
     AddBasketProduct=7,
     ShowBasket=8,
     CreateInvoice=9,
-    ShowInvoices=10
+    ShowInvoices=10,
+    PayInvoice=11,
+    CreateWallet=12,
+    CreateCategory=14,
+    UpdateCategory=15,
+    DeleteCategory=16
 }

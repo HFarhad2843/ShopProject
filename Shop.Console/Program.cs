@@ -1,12 +1,14 @@
 ﻿using Shop.Business.Services;
 using Shop.Business.Utilities.Helpers;
 using Shop.Core.Entities;
+using System.Security.Principal;
 
 Console.WriteLine("Shop Project");
 Console.WriteLine();
 Console.WriteLine("Shop App Start:");
 Console.WriteLine();
 int SessionId = 0;
+string Role = string.Empty;
 UserService userService = new();
 ProductService productService = new();
 CategoryService categoryService = new();
@@ -17,23 +19,52 @@ InvoiceService invoiceService = new();
 bool isContinue = true;
 while (isContinue)
 {
-    Console.WriteLine("Choose the option:");
-    Console.WriteLine("-- Users--\n" +
-    "1 - Login User\n"+
-    "2 - Register User");
+    if (SessionId == 0 && Role==string.Empty)
+    {
+        Console.WriteLine("1 - Login User\n"+ "2 - Register User");
+    }
+    if (SessionId>0 && Role=="User")
+    {
+        Console.WriteLine("-- Shop area--\n" +
+   "3 - Show all Categories\n" +
+   "4 - Show all Brands\n" +
+   "5 - Show all Products\n");
 
-    Console.WriteLine("-- Shop area--\n" +
-    "3 - Show all Categories\n" +
-    "4 - Show all Brands\n"+
-    "5 - Show all Products\n");
+        Console.WriteLine("-- Account Information--\n" +
+"6 - Show all Wallets\n" +
+"7 - Add Product To Basket\n" +
+"8 - Show Basket\n" +
+"9 - Create Invoice\n" +
+"10 - Show Invoices\n" +
+"11 - Pay Invoice\n" +
+"12 - Create Wallet");
+    }
+    if(SessionId>0  && Role=="Admin")
+    {
+        Console.WriteLine("-- Admin area--\n");
+        Console.WriteLine("-- Categories--\n"+
+            "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n"); 
+    }
 
-    Console.WriteLine("-- Account Information--\n" +
-"6 - Show all Wallets\n"+
-"7 - Add Product To Basket\n"+
-"8 - Show Basket\n"+
-"9 - Create Invoice\n"+
-"10 - Show Invoices\n"+
-"11 -Pay Invoice");
+
+    //Console.WriteLine("Choose the option:");
+    //Console.WriteLine("-- Users--\n" +
+    //"1 - Login User\n"+
+    //"2 - Register User");
+
+    //Console.WriteLine("-- Shop area--\n" +
+    //"3 - Show all Categories\n" +
+    //"4 - Show all Brands\n"+
+    //"5 - Show all Products\n");
+
+//    Console.WriteLine("-- Account Information--\n" +
+//"6 - Show all Wallets\n"+
+//"7 - Add Product To Basket\n"+
+//"8 - Show Basket\n"+
+//"9 - Create Invoice\n"+
+//"10 - Show Invoices\n"+
+//"11 - Pay Invoice\n"+
+//"12 - Create Wallet");
 
     string? option = Console.ReadLine();
     const int MaxMenu = 21;
@@ -54,6 +85,7 @@ while (isContinue)
                     {
                         Console.WriteLine("Giriş uğurludur:");
                         SessionId = userService.GetUserId(userName, password);
+                        Role = userService.GetUserRole(SessionId);
                     }
                     else 
                     { 
@@ -169,6 +201,76 @@ while (isContinue)
                     else
                     {
                         invoiceService.GetInovicesByUserId(SessionId);
+                    }
+                    break;
+                case (int)Menu.PayInvoice:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        invoiceService.GetInovicesByUserId(SessionId);
+                    }
+                    break;
+                case (int)Menu.CreateWallet:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Wallet wallet = new Wallet();
+                        wallet.UserId = SessionId;
+                        Console.WriteLine("Card name daxil edin");
+                        wallet.CardName = Console.ReadLine();
+                        Console.WriteLine("Card number daxil edin");
+                        wallet.CardNumber = Convert.ToInt64(Console.ReadLine());
+                        Console.WriteLine("Balansı daxil edin");
+                        wallet.Balance=Convert.ToDecimal(Console.ReadLine());
+                        walletService.CreateWallet(wallet);
+                    }
+                    break;
+
+                case (int)Menu.CreateCategory:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kateqoriya adini daxil edin");
+                        Category category = new ();
+                        category.Name = Console.ReadLine();
+                        
+                        categoryService.CreateCategory(category);
+                    }
+                    break;
+                case (int)Menu.UpdateCategory:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Category category = new ();
+                        Console.WriteLine("Id ni daxil edin");
+                        category.Id=Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Kateqoriya adini daxil edin");
+                        category.Name = Console.ReadLine();
+                        categoryService.UpdateCategory(category);
+                    }
+                    break;
+                case (int)Menu.DeleteCategory:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Id ni daxil edin");
+                        int CategoryId = Convert.ToInt32(Console.ReadLine()); 
+                        categoryService.DeleteCategory(CategoryId);
                     }
                     break;
             }

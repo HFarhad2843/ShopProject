@@ -12,7 +12,11 @@ public class BasketProductService : IBasketProductService
     public void AddBasketProduct(int ProductId,int Quantity, int UserId)
     {
         Product product =new Product();
-        product=appDbContext.products.Where(x=>x.Id== ProductId).FirstOrDefault(); 
+        product=appDbContext.products.Where(x=>x.Id== ProductId).FirstOrDefault();
+        if (product==null)
+        {
+            throw new Exception("Bu id-li mehsul yoxdur.");
+        }
         if (product.Quantity < Quantity)
         {
             throw new Exception("Bu məhsuldan siz istediyiniz sayda  stokda yoxdur.");
@@ -62,7 +66,6 @@ public class BasketProductService : IBasketProductService
         { 
             Console.WriteLine("zenbil yaradilmayib");
         }
-        
     }
 }
 //for now 

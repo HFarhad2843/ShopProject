@@ -30,6 +30,28 @@ public class InvoiceService : IInvoiceService
         Console.WriteLine("Invoice yaradildi");
     }
 
+    public void PayInvoice(int invoiceId)
+    {
+    //    Invoice invoice=appDbContext.invoices.FirstOrDefault(x=>x.Id==invoiceId);
+    //    if (invoice!=null)
+    //    {
+
+    //    }
+    //    appDbContext.SaveChanges();
+    //    foreach (BasketProduct basketProduct in basketProducts)
+    //    {
+    //        ProductInvoice productInvoice = new();
+    //        productInvoice.ProductId = basketProduct.ProductId;
+    //        productInvoice.ProductPrice = basketProduct.Product.Price;
+    //        productInvoice.ProductCount = basketProduct.ProductQuantity;
+    //        productInvoice.InvoiceId = invoice.Id;
+    //        appDbContext.productsInvoices.Add(productInvoice);
+    //    }
+    //    appDbContext.SaveChanges();
+
+    //    Console.WriteLine("Invoice yaradildi");
+    }
+
 
     public bool CheckBalance(int WalletId,decimal TotalPrice)
     {
@@ -46,7 +68,6 @@ public class InvoiceService : IInvoiceService
             {
                 Console.WriteLine("balansda kifayet qeder pul yoxdur");
                 return false;
-
             }
             else
             {
