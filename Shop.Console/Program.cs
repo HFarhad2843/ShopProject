@@ -43,10 +43,11 @@ while (isContinue)
     {
         Console.WriteLine("-- Admin area--\n");
         Console.WriteLine("-- Categories--\n"+
-            "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n");
+        "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n");
         Console.WriteLine("-- Brands--\n" +
-                "4-Show all Brands\n" + "17-Create Brand\n" + "18-Update Brand\n" + "19-Delete Brand\n");
-
+        "4-Show all Brands\n" + "17-Create Brand\n" + "18-Update Brand\n" + "19-Delete Brand\n");
+        Console.WriteLine("-- Products--\n" +
+        "5-Show all Product\n" + "20-Create Product\n" + "21-Update Product\n" + "22-Delete Product\n");
     }
 
 
@@ -315,6 +316,66 @@ while (isContinue)
                         Console.WriteLine("Id ni daxil edin");
                         int BrandId = Convert.ToInt32(Console.ReadLine());
                         brandService.DeleteBrand(BrandId);
+                    }
+                    break;
+
+                case (int)Menu.CreateProduct:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Product product = new();
+                        Console.WriteLine("Product adini daxil edin");
+                        product.Name = Console.ReadLine();
+                        Console.WriteLine("Product qiymetini daxil edin");
+                        product.Price = Convert.ToDecimal(Console.ReadLine());
+                        Console.WriteLine("Stok sayini daxil edin");
+                        product.Quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Kateqoriyani daxil edin");
+                        categoryService.ShowAll();
+                        product.CategoryId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Brendi daxil edin");
+                        brandService.ShowAll();
+                        product.BrandId = Convert.ToInt32(Console.ReadLine());
+                        productService.CreateProduct(product);
+                    }
+                    break;
+                case (int)Menu.UpdateProduct:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Product product = new();
+                        Console.WriteLine("Product adini daxil edin");
+                        product.Name = Console.ReadLine();
+                        Console.WriteLine("Product qiymetini daxil edin");
+                        product.Price = Convert.ToDecimal(Console.ReadLine());
+                        Console.WriteLine("Stok sayini daxil edin");
+                        product.Quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Kateqoriyani daxil edin");
+                        categoryService.ShowAll();
+                        product.CategoryId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Brendi daxil edin");
+                        brandService.ShowAll();
+                        product.BrandId = Convert.ToInt32(Console.ReadLine());
+                        productService.UpdateProduct(product);
+
+                    }
+                    break;
+                case (int)Menu.DeleteProduct:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Id ni daxil edin");
+                        int ProductId = Convert.ToInt32(Console.ReadLine());
+                        productService.DeleteProduct(ProductId);
                     }
                     break;
             }

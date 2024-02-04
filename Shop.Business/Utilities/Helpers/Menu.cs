@@ -21,4 +21,8 @@ public enum Menu
     CreateBrand=17,
     UpdateBrand=18,
     DeleteBrand=19,
+
+    CreateProduct=20,
+  UpdateProduct=21,
+    DeleteProduct=22
 }
