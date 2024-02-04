@@ -28,6 +28,7 @@ public class ProductService:IProductService
         {
             appDbContext.products.Add(product);
             appDbContext.SaveChanges();
+            Console.WriteLine("product elave edildi");
         }
         else
         {

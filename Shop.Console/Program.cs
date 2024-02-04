@@ -16,6 +16,7 @@ BrandService brandService = new();
 WalletService walletService = new();
 BasketProductService basketProductService = new();
 InvoiceService invoiceService = new();
+DiscountService discountService = new();
 bool isContinue = true;
 while (isContinue)
 {
@@ -48,30 +49,12 @@ while (isContinue)
         "4-Show all Brands\n" + "17-Create Brand\n" + "18-Update Brand\n" + "19-Delete Brand\n");
         Console.WriteLine("-- Products--\n" +
         "5-Show all Product\n" + "20-Create Product\n" + "21-Update Product\n" + "22-Delete Product\n");
+        Console.WriteLine("-- Discounts--\n" +
+      "23-Show all Discounts\n" + "24-Create Discount\n");
     }
 
-
-    //Console.WriteLine("Choose the option:");
-    //Console.WriteLine("-- Users--\n" +
-    //"1 - Login User\n"+
-    //"2 - Register User");
-
-    //Console.WriteLine("-- Shop area--\n" +
-    //"3 - Show all Categories\n" +
-    //"4 - Show all Brands\n"+
-    //"5 - Show all Products\n");
-
-//    Console.WriteLine("-- Account Information--\n" +
-//"6 - Show all Wallets\n"+
-//"7 - Add Product To Basket\n"+
-//"8 - Show Basket\n"+
-//"9 - Create Invoice\n"+
-//"10 - Show Invoices\n"+
-//"11 - Pay Invoice\n"+
-//"12 - Create Wallet");
-
     string? option = Console.ReadLine();
-    const int MaxMenu = 21;
+    const int MaxMenu = 30;
     int optionNumber;
     bool isInt = int.TryParse(option, out optionNumber);
     if (isInt)
@@ -339,6 +322,16 @@ while (isContinue)
                         Console.WriteLine("Brendi daxil edin");
                         brandService.ShowAll();
                         product.BrandId = Convert.ToInt32(Console.ReadLine());
+                        int? isDiscount = 0;
+                        Console.WriteLine("Endrim daxil edirsinizmi? Beli-1, Xeyr-2 ");
+                        isDiscount = Convert.ToInt32(Console.ReadLine());
+                        if (isDiscount == 1)
+                        {
+                            discountService.ShowAll();
+                            Console.WriteLine("endrim secin");
+                            product.DiscountId = Convert.ToInt32(Console.ReadLine());
+                        }
+
                         productService.CreateProduct(product);
                     }
                     break;
@@ -362,6 +355,9 @@ while (isContinue)
                         Console.WriteLine("Brendi daxil edin");
                         brandService.ShowAll();
                         product.BrandId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Endrimi daxil edin");
+                        discountService.ShowAll();
+                        product.DiscountId = Convert.ToInt32(Console.ReadLine());
                         productService.UpdateProduct(product);
 
                     }
@@ -376,6 +372,38 @@ while (isContinue)
                         Console.WriteLine("Id ni daxil edin");
                         int ProductId = Convert.ToInt32(Console.ReadLine());
                         productService.DeleteProduct(ProductId);
+                    }
+                    break;
+
+                case (int)Menu.ShowDiscounts:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        discountService.ShowAll();
+                    }
+                    break;
+                case (int)Menu.CreateDiscount:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Discount discount = new();
+                        Console.WriteLine("Discount adini daxil edin");
+                        discount.Name = Console.ReadLine();
+                        Console.WriteLine("Endrim faizini daxil edin");
+                        discount.DiscountPercent = Convert.ToDecimal(Console.ReadLine());
+                        Console.WriteLine("Description daxil edin");
+                        discount.Description = Console.ReadLine();
+                        Console.WriteLine("Baslangic  tarixi daxil edin");
+                        discount.StartTime = Convert.ToDateTime(Console.ReadLine());
+                        Console.WriteLine("Son tarixi daxil edin");
+                        discount.EndTime = Convert.ToDateTime(Console.ReadLine());
+                        discountService.CreateDiscount(discount);
                     }
                     break;
             }

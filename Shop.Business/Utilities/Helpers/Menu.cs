@@ -23,6 +23,10 @@ public enum Menu
     DeleteBrand=19,
 
     CreateProduct=20,
-  UpdateProduct=21,
-    DeleteProduct=22
+    UpdateProduct=21,
+    DeleteProduct=22,
+
+    ShowDiscounts=23,
+    CreateDiscount=24,
+    DeleteDiscount=25
 }
