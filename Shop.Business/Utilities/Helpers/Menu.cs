@@ -3,7 +3,6 @@
 public enum Menu
 {
     //User
-   // ShowUsers=1,
     LoginUser=1,
     RegisterUser=2,
     ShowAllCategories=3,
@@ -18,5 +17,8 @@ public enum Menu
     CreateWallet=12,
     CreateCategory=14,
     UpdateCategory=15,
-    DeleteCategory=16
+    DeleteCategory=16,
+    CreateBrand=17,
+    UpdateBrand=18,
+    DeleteBrand=19,
 }

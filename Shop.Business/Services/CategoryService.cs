@@ -1,9 +1,10 @@
-﻿using Shop.Core.Entities;
+﻿using Shop.Business.Interfaces;
+using Shop.Core.Entities;
 using Shop.DataAccess.DataAccess;
 
 namespace Shop.Business.Services;
 
-public class CategoryService
+public class CategoryService:ICategoryService
 {
     AppDbContext appDbContext = new AppDbContext();
 
@@ -18,7 +19,7 @@ public class CategoryService
     }
     public void CreateCategory(Category category)
     {
-        Category checkCategory=appDbContext.categories.Where(x=>x.Name== category.Name).FirstOrDefault();
+        Category checkCategory=appDbContext.categories.Where(x=>x.Name== category.Name && x.IsDeleted==false).FirstOrDefault();
         if (checkCategory==null) 
         {
             appDbContext.categories.Add(category);
@@ -58,7 +59,6 @@ public class CategoryService
             checkCategory.IsDeleted = true;
             appDbContext.SaveChanges();
             Console.WriteLine("kateqoriya silindi");
-
         }
     }
 }

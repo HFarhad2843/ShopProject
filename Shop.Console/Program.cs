@@ -43,7 +43,10 @@ while (isContinue)
     {
         Console.WriteLine("-- Admin area--\n");
         Console.WriteLine("-- Categories--\n"+
-            "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n"); 
+            "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n");
+        Console.WriteLine("-- Brands--\n" +
+                "4-Show all Brands\n" + "17-Create Brand\n" + "18-Update Brand\n" + "19-Delete Brand\n");
+
     }
 
 
@@ -271,6 +274,47 @@ while (isContinue)
                         Console.WriteLine("Id ni daxil edin");
                         int CategoryId = Convert.ToInt32(Console.ReadLine()); 
                         categoryService.DeleteCategory(CategoryId);
+                    }
+                    break;
+                case (int)Menu.CreateBrand:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Brand adini daxil edin");
+                        Brand brand = new();
+                        brand.Name = Console.ReadLine();
+
+                        brandService.CreateBrand(brand);
+                    }
+                    break;
+                case (int)Menu.UpdateBrand:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Brand brand = new();
+                        Console.WriteLine("Id ni daxil edin");
+                        brand.Id = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Brend adini daxil edin");
+                        brand.Name = Console.ReadLine();
+                        brandService.UpdateBrand(brand);
+                    }
+                    break;
+                case (int)Menu.DeleteBrand:
+                    if (SessionId == 0)
+                    {
+                        Console.WriteLine("Ilk once login olun");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Id ni daxil edin");
+                        int BrandId = Convert.ToInt32(Console.ReadLine());
+                        brandService.DeleteBrand(BrandId);
                     }
                     break;
             }
