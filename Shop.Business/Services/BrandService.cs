@@ -37,10 +37,17 @@ public class BrandService:IBrandService
         }
     }
 
-    public void ShowAll()
+    public void ShowAll(string Role)
     {
         List<Brand> list = new List<Brand>();
-        list = appDbContext.brands.Where(x=>x.IsDeleted==false).ToList();
+        if (Role=="User")
+        {
+            list = appDbContext.brands.Where(x => x.IsDeleted == false).ToList();
+        }
+        if (Role=="Admin")
+        {
+            list = appDbContext.brands.ToList();
+        }
         foreach (var item in list)
         {
             Console.WriteLine("id: " + item.Id + " name: " + item.Name);

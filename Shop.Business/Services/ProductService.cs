@@ -8,10 +8,17 @@ namespace Shop.Business.Services;
 public class ProductService:IProductService
 {
     AppDbContext appDbContext = new AppDbContext();
-    public void ShowAll()
+    public void ShowAll(string Role)
     {
         List<Product> list = new List<Product>();
-        list = appDbContext.products.Include(x=>x.Category).Include(x=>x.Brand).Include(x=>x.Discount).ToList();
+        if (Role=="admin")
+        {
+            list = appDbContext.products.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Discount).ToList();
+        }
+        if (Role=="user")
+        {
+            list = appDbContext.products.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Discount).Where(x=>x.IsDeleted==false).ToList();
+        }
         foreach (var item in list)
         {
             Console.WriteLine("Id: " + item.Id + " Name: " + item.Name + " Category: "+item.Category.Name+ " Brand: " + item.Brand.Name +" Price: "+ item.Price +" Quantity: "+item.Quantity );

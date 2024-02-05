@@ -8,10 +8,17 @@ public class CategoryService:ICategoryService
 {
     AppDbContext appDbContext = new AppDbContext();
 
-    public void ShowAll()
+    public void ShowAll(string Role)
     {
         List<Category> list = new List<Category>();
-        list = appDbContext.categories.Where(x=>x.IsDeleted==false).ToList();
+        if (Role == "User")
+        {
+            list = appDbContext.categories.Where(x => x.IsDeleted == false).ToList();
+        }
+        if (Role =="Admin")
+        {
+            list = appDbContext.categories.ToList();
+        }
         foreach (var item in list)
         {
             Console.WriteLine("id: " + item.Id + " name: " + item.Name);

@@ -18,13 +18,18 @@ BasketProductService basketProductService = new();
 InvoiceService invoiceService = new();
 DiscountService discountService = new();
 bool isContinue = true;
+const string guestMessage = "Siz login olmamasiz.mehsullar uzerinde alish verish etmek ucun login olmalisiz";
+Console.WriteLine("Mehsullar");
+Console.WriteLine(guestMessage);
+productService.ShowAll("user");
+
 while (isContinue)
 {
     if (SessionId == 0 && Role==string.Empty)
     {
         Console.WriteLine("1 - Login User\n"+ "2 - Register User");
     }
-    if (SessionId>0 && Role=="User")
+    if (SessionId>0 && Role=="user")
     {
         Console.WriteLine("-- Shop area--\n" +
    "3 - Show all Categories\n" +
@@ -40,7 +45,7 @@ while (isContinue)
    "11 - Pay Invoice\n" +
    "12 - Create Wallet");
     }
-    if(SessionId>0  && Role=="Admin")
+    if(SessionId>0  && Role=="admin")
     {
         Console.WriteLine("-- Admin area--\n");
         Console.WriteLine("-- Categories--\n"+
@@ -109,15 +114,15 @@ while (isContinue)
 
                     break;
                 case (int)Menu.ShowAllCategories:
-                    categoryService.ShowAll();
+                    categoryService.ShowAll(Role);
 
                     break;
                 case (int)Menu.ShowAllBrands:
-                    brandService.ShowAll();
+                    brandService.ShowAll(Role);
                     break;
 
                 case (int)Menu.ShowAllProducts:
-                    productService.ShowAll();
+                    productService.ShowAll(Role);
                     break;
 
                 case (int)Menu.ShowAllWallets:
@@ -317,10 +322,10 @@ while (isContinue)
                         Console.WriteLine("Stok sayini daxil edin");
                         product.Quantity = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Kateqoriyani daxil edin");
-                        categoryService.ShowAll();
+                        categoryService.ShowAll(Role);
                         product.CategoryId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Brendi daxil edin");
-                        brandService.ShowAll();
+                        brandService.ShowAll(Role);
                         product.BrandId = Convert.ToInt32(Console.ReadLine());
                         int? isDiscount = 0;
                         Console.WriteLine("Endirim daxil edirsinizmi? Beli-1, Xeyr-2 ");
@@ -350,10 +355,10 @@ while (isContinue)
                         Console.WriteLine("Stok sayini daxil edin");
                         product.Quantity = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Kateqoriyani daxil edin");
-                        categoryService.ShowAll();
+                        categoryService.ShowAll(Role);
                         product.CategoryId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Brendi daxil edin");
-                        brandService.ShowAll();
+                        brandService.ShowAll(Role);
                         product.BrandId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Endrimi daxil edin");
                         discountService.ShowAll();

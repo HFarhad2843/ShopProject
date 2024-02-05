@@ -29,11 +29,11 @@ namespace Shop.Business.Services
             User checkUser = appDbContext.users.Where(x => x.Id==id).FirstOrDefault();
             if (checkUser.IsAdmin == 1)
             {
-                return "Admin";
+                return "admin";
             }
             else
             {
-                return "User";
+                return "user";
             }
         }
 

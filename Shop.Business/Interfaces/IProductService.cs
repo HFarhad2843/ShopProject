@@ -4,7 +4,7 @@ namespace Shop.Business.Interfaces;
 
 public interface IProductService
 {
-    void ShowAll();
+    void ShowAll(string Role);
     void CreateProduct(Product product);
 
     void UpdateProduct(Product product);
