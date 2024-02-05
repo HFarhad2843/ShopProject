@@ -11,9 +11,31 @@ public class InvoiceService : IInvoiceService
     public void CreateInvoice(Invoice invoice)
     {
         List<BasketProduct> basketProducts = new List<BasketProduct>();
+        List<int> productIds = new List<int>();
         basketProducts=appDbContext.basketproducts.Include(x=>x.Product).Where(x=>x.Basket.UserId== invoice.UserId && x.IsDeleted==false).ToList();
-        invoice.TotalPrice = basketProducts.Sum(x => x.ProductQuantity * x.Product.Price);
+        decimal TotalPrice = 0;
+        decimal initialPrice = 0;
+        decimal calculatedDiscount = 0;
+        decimal calculatedPrice = 0;
 
+        foreach (BasketProduct basketProductDetail in basketProducts)
+        {
+            initialPrice = basketProductDetail.Product.Price;
+
+            if (basketProductDetail.Product.Discount!=null)
+            {
+                calculatedDiscount =  initialPrice * basketProductDetail.Product.Discount.DiscountPercent / 100;
+                calculatedPrice = (initialPrice - calculatedDiscount)*basketProductDetail.ProductQuantity;
+                TotalPrice += calculatedPrice; 
+            }
+            else
+            {
+                calculatedPrice = initialPrice * basketProductDetail.ProductQuantity;
+                TotalPrice += calculatedPrice;
+            }
+        }
+
+        invoice.TotalPrice = TotalPrice;
         appDbContext.invoices.Add(invoice);
         appDbContext.SaveChanges();
         foreach (BasketProduct basketProduct in basketProducts)
@@ -24,36 +46,44 @@ public class InvoiceService : IInvoiceService
             productInvoice.ProductCount = basketProduct.ProductQuantity;
             productInvoice.InvoiceId = invoice.Id;
             appDbContext.productsInvoices.Add(productInvoice);
+            productIds.Add(productInvoice.ProductId);
+        }
+        appDbContext.SaveChanges();
+        Console.WriteLine("Invoice yaradildi");
+
+        bool paymentStatus = PaymentCheckout(invoice.WalletId, TotalPrice);
+        if (paymentStatus)
+        {
+            Console.WriteLine("invoice odendi");
+            ClearBasket(invoice.UserId);
+            ChangeProductStockQuantity(invoice.Id);
+
+        }
+        else 
+        {
+            Console.WriteLine("odenisde xeta bas verdi");
+        }
+    }
+
+    public void ClearBasket(int userId)
+    {
+       Basket basket=appDbContext.baskets.FirstOrDefault(x=>x.UserId==userId);
+        if (basket != null)
+        {
+            basket.IsDeleted = true;
+            List<BasketProduct> basketProducts = new List<BasketProduct>();
+            foreach (BasketProduct basketProduct in basketProducts)
+            {
+                basketProduct.IsDeleted = true;
+            }
         }
         appDbContext.SaveChanges();
 
-        Console.WriteLine("Invoice yaradildi");
-    }
-
-    public void PayInvoice(int invoiceId)
-    {
-    //    Invoice invoice=appDbContext.invoices.FirstOrDefault(x=>x.Id==invoiceId);
-    //    if (invoice!=null)
-    //    {
-
-    //    }
-    //    appDbContext.SaveChanges();
-    //    foreach (BasketProduct basketProduct in basketProducts)
-    //    {
-    //        ProductInvoice productInvoice = new();
-    //        productInvoice.ProductId = basketProduct.ProductId;
-    //        productInvoice.ProductPrice = basketProduct.Product.Price;
-    //        productInvoice.ProductCount = basketProduct.ProductQuantity;
-    //        productInvoice.InvoiceId = invoice.Id;
-    //        appDbContext.productsInvoices.Add(productInvoice);
-    //    }
-    //    appDbContext.SaveChanges();
-
-    //    Console.WriteLine("Invoice yaradildi");
+        Console.WriteLine("Zenbil bosaldildi");
     }
 
 
-    public bool CheckBalance(int WalletId,decimal TotalPrice)
+    public bool PaymentCheckout(int WalletId,decimal TotalPrice)
     {
         Wallet wallet= new Wallet();
         wallet = appDbContext.wallets.FirstOrDefault(x => x.Id == WalletId);
@@ -72,11 +102,22 @@ public class InvoiceService : IInvoiceService
             else
             {
                 wallet.Balance -= TotalPrice;
+                appDbContext.SaveChanges();
                 return true;
             }
         }
     }
-
+    public void ChangeProductStockQuantity(int invoiceId)
+    {
+        List<ProductInvoice> productInvoices = appDbContext.productsInvoices.Where(x => x.InvoiceId == invoiceId).ToList();
+        foreach (var productInvoice in productInvoices)
+        {
+            Product product = appDbContext.products.FirstOrDefault(x => x.Id == productInvoice.ProductId);
+            product.Quantity -= productInvoice.ProductCount;
+        }
+        appDbContext.SaveChanges();
+        Console.WriteLine("mehsullarin stok sayi azaldildi");
+    }
     public void GetInovicesByUserId(int userId)
     {
         List<Invoice>invoices = new List<Invoice>();

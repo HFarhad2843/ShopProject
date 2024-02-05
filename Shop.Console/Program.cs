@@ -32,13 +32,13 @@ while (isContinue)
    "5 - Show all Products\n");
 
         Console.WriteLine("-- Account Information--\n" +
-"6 - Show all Wallets\n" +
-"7 - Add Product To Basket\n" +
-"8 - Show Basket\n" +
-"9 - Create Invoice\n" +
-"10 - Show Invoices\n" +
-"11 - Pay Invoice\n" +
-"12 - Create Wallet");
+   "6 - Show all Wallets\n" +
+   "7 - Add Product To Basket\n" +
+   "8 - Show Basket\n" +
+   "9 - Create Invoice\n" +
+   "10 - Show Invoices\n" +
+   "11 - Pay Invoice\n" +
+   "12 - Create Wallet");
     }
     if(SessionId>0  && Role=="Admin")
     {
@@ -50,7 +50,7 @@ while (isContinue)
         Console.WriteLine("-- Products--\n" +
         "5-Show all Product\n" + "20-Create Product\n" + "21-Update Product\n" + "22-Delete Product\n");
         Console.WriteLine("-- Discounts--\n" +
-      "23-Show all Discounts\n" + "24-Create Discount\n");
+        "23-Show all Discounts\n" + "24-Create Discount\n");
     }
 
     string? option = Console.ReadLine();
@@ -96,7 +96,7 @@ while (isContinue)
                     Console.WriteLine("Enter Phone:");
                     string phone = Console.ReadLine();
 
-                    // Now you have all the inputs, you can create the User object
+                    
                     var user = new User
                     {
                         UserName = userRegName,
@@ -137,10 +137,10 @@ while (isContinue)
                     }
                     else
                     {
-                        Console.WriteLine("zenbile atmaq istediyiniz mehsulun id-ni secin");
+                        Console.WriteLine("Zenbile atmaq istediyiniz mehsulun id-ni secin");
                         int ProductId = Convert.ToInt32(Console.ReadLine());
 
-                        Console.WriteLine("zenbile atmaq istediyiniz mehsulun sayini secin");
+                        Console.WriteLine("Zenbile atmaq istediyiniz mehsulun sayini secin");
                         int Quantity = Convert.ToInt32(Console.ReadLine());
                         basketProductService.AddBasketProduct(ProductId,Quantity,SessionId);
                     }
@@ -162,7 +162,7 @@ while (isContinue)
                     }
                     else
                     {
-                        Console.WriteLine("Hal hazirda zenbilde olan mallarin siyahisi:");
+                        Console.WriteLine("Hal-hazirda zenbilde olan mallarin siyahisi:");
                         basketProductService.GetUserBasketProducts(SessionId);
 
                         Console.WriteLine("Odeme kartini secin:");
@@ -267,7 +267,7 @@ while (isContinue)
                     }
                     else
                     {
-                        Console.WriteLine("Brand adini daxil edin");
+                        Console.WriteLine("Brend adini daxil edin");
                         Brand brand = new();
                         brand.Name = Console.ReadLine();
 
@@ -323,12 +323,12 @@ while (isContinue)
                         brandService.ShowAll();
                         product.BrandId = Convert.ToInt32(Console.ReadLine());
                         int? isDiscount = 0;
-                        Console.WriteLine("Endrim daxil edirsinizmi? Beli-1, Xeyr-2 ");
+                        Console.WriteLine("Endirim daxil edirsinizmi? Beli-1, Xeyr-2 ");
                         isDiscount = Convert.ToInt32(Console.ReadLine());
                         if (isDiscount == 1)
                         {
                             discountService.ShowAll();
-                            Console.WriteLine("endrim secin");
+                            Console.WriteLine("Endirim secin");
                             product.DiscountId = Convert.ToInt32(Console.ReadLine());
                         }
 

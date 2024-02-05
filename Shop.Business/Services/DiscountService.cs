@@ -12,7 +12,7 @@ public class DiscountService : IDiscountService
     {
        appDbContext.discounts.Add(discount);
        appDbContext.SaveChanges();
-       Console.WriteLine("Endrim elave edildi");
+       Console.WriteLine("Endirim elave edildi");
     }
 
     public void ShowAll()
@@ -21,7 +21,7 @@ public class DiscountService : IDiscountService
         list = appDbContext.discounts.Where(x => x.IsDeleted == false).ToList();
         foreach (var item in list)
         {
-            Console.WriteLine("id: " + item.Id + " name: " + item.Name +" endrim faizi " +item.DiscountPercent+" etrafli melumat "+item.Description);
+            Console.WriteLine("id: " + item.Id + " name: " + item.Name +" endirim faizi " +item.DiscountPercent+" etrafli melumat "+item.Description);
             Console.WriteLine(" Baslangic muddet " + item.StartTime +" Son muddet "+item.EndTime);
         }
     }
