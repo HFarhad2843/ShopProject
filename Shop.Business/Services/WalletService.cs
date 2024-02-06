@@ -12,6 +12,7 @@ public class WalletService : IWalletService
     {
         List<Wallet> userWallets = new List<Wallet>();
         userWallets = appDbContext.wallets.Where(x => x.UserId == userId).ToList();
+        Console.WriteLine("Menim yaddasda saxladigim kartlarim");
         foreach (Wallet wallet in userWallets)
         {
             Console.WriteLine("WalletId: " + wallet.Id + " Card Name: " + wallet.CardName + " Card Number " + wallet.CardNumber + " Balance: " + wallet.Balance);

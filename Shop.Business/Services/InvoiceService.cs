@@ -36,6 +36,7 @@ public class InvoiceService : IInvoiceService
         }
 
         invoice.TotalPrice = TotalPrice;
+        invoice.InvoiceStatus = 1; //yeni yaradilmis invoice statusu
         appDbContext.invoices.Add(invoice);
         appDbContext.SaveChanges();
         foreach (BasketProduct basketProduct in basketProducts)
@@ -51,23 +52,33 @@ public class InvoiceService : IInvoiceService
         appDbContext.SaveChanges();
         Console.WriteLine("Invoice yaradildi");
 
-        bool paymentStatus = PaymentCheckout(invoice.WalletId, TotalPrice);
-        if (paymentStatus)
-        {
-            Console.WriteLine("invoice odendi");
-            ClearBasket(invoice.UserId);
-            ChangeProductStockQuantity(invoice.Id);
-
-        }
-        else 
-        {
-            Console.WriteLine("odenisde xeta bas verdi");
-        }
+       
     }
 
+  
+    public void PayInvoice(int InvoiceId)
+    {
+        Invoice invoice = appDbContext.invoices.FirstOrDefault(x => x.Id == InvoiceId);
+        if (invoice != null)
+        {
+            bool paymentStatus = PaymentCheckout(invoice.WalletId,invoice.TotalPrice); //kartdaki balansi yoxlayir
+            if (paymentStatus) //balansda kifayet qeder pul varsa novbeti emeliyyatlara kecir
+            {
+                Console.WriteLine("invoice odendi");
+                ClearBasket(invoice.UserId); //cari userin zenbilini temizleyir
+                ChangeProductStockQuantity(invoice.Id); //mehsulun stok sayini azaldit
+                invoice.InvoiceStatus = 2;//odendi statusu
+            }
+            else
+            {
+                Console.WriteLine("odenisde xeta bas verdi balansda kifayet qeder pul yoxdur");
+            }
+        }
+        
+    }
     public void ClearBasket(int userId)
     {
-       Basket basket=appDbContext.baskets.FirstOrDefault(x=>x.UserId==userId);
+        Basket basket = appDbContext.baskets.FirstOrDefault(x => x.UserId == userId);
         if (basket != null)
         {
             basket.IsDeleted = true;
@@ -81,7 +92,6 @@ public class InvoiceService : IInvoiceService
 
         Console.WriteLine("Zenbil bosaldildi");
     }
-
 
     public bool PaymentCheckout(int WalletId,decimal TotalPrice)
     {

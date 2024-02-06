@@ -11,14 +11,15 @@ public class CategoryService:ICategoryService
     public void ShowAll(string Role)
     {
         List<Category> list = new List<Category>();
-        if (Role == "User")
+        if (Role == "user")
         {
             list = appDbContext.categories.Where(x => x.IsDeleted == false).ToList();
         }
-        if (Role =="Admin")
+        if (Role =="admin")
         {
             list = appDbContext.categories.ToList();
         }
+        Console.WriteLine("Kateqoriyalar");
         foreach (var item in list)
         {
             Console.WriteLine("id: " + item.Id + " name: " + item.Name);

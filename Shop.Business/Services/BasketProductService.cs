@@ -54,7 +54,7 @@ public class BasketProductService : IBasketProductService
             {
                 foreach (var item in basket.BasketProducts)
                 {
-                    Console.WriteLine("id: " + item.Id + "product name: " + item.Product.Name + " quantity: " + item.ProductQuantity);
+                    Console.WriteLine("id: " + item.Id + "product name: " + item.Product.Name +" price "+ item.Product.Price+ " quantity: " + item.ProductQuantity + " Toplam qiymet "+item.Product.Price*item.ProductQuantity);
                 }
             }
             else

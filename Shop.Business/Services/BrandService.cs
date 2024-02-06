@@ -40,14 +40,16 @@ public class BrandService:IBrandService
     public void ShowAll(string Role)
     {
         List<Brand> list = new List<Brand>();
-        if (Role=="User")
+        if (Role=="user")
         {
             list = appDbContext.brands.Where(x => x.IsDeleted == false).ToList();
         }
-        if (Role=="Admin")
+        if (Role=="admin")
         {
             list = appDbContext.brands.ToList();
         }
+        Console.WriteLine("Brendler");
+
         foreach (var item in list)
         {
             Console.WriteLine("id: " + item.Id + " name: " + item.Name);

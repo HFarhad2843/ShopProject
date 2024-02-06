@@ -19,6 +19,8 @@ public class ProductService:IProductService
         {
             list = appDbContext.products.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Discount).Where(x=>x.IsDeleted==false).ToList();
         }
+        Console.WriteLine("Mehsullar");
+
         foreach (var item in list)
         {
             Console.WriteLine("Id: " + item.Id + " Name: " + item.Name + " Category: "+item.Category.Name+ " Brand: " + item.Brand.Name +" Price: "+ item.Price +" Quantity: "+item.Quantity );

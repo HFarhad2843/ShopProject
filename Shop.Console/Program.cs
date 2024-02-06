@@ -18,7 +18,8 @@ BasketProductService basketProductService = new();
 InvoiceService invoiceService = new();
 DiscountService discountService = new();
 bool isContinue = true;
-const string guestMessage = "Siz login olmamasiz.mehsullar uzerinde alish verish etmek ucun login olmalisiz";
+const string guestMessage = "Siz login olmamisiniz.Yalniz mehsullara baxis kecire bilersiniz.Mehsullarin endrimleri mehsullar haqqindaki melumatin asagisinda yerlesir.Mehsullar uzerinde alish verish etmek ucun login olmalisiz.Sade user kimi login olmaq ucun 1 admin useri kimi login olmaq ucun 2 duymesini secin";
+Console.WriteLine();
 Console.WriteLine("Mehsullar");
 Console.WriteLine(guestMessage);
 productService.ShowAll("user");
@@ -142,6 +143,7 @@ while (isContinue)
                     }
                     else
                     {
+                        productService.ShowAll(Role);
                         Console.WriteLine("Zenbile atmaq istediyiniz mehsulun id-ni secin");
                         int ProductId = Convert.ToInt32(Console.ReadLine());
 
@@ -203,6 +205,9 @@ while (isContinue)
                     else
                     {
                         invoiceService.GetInovicesByUserId(SessionId);
+                        Console.WriteLine("odemek istediyiniz invoice id-ni daxil edin");
+                        int InvoiceId=Convert.ToInt32(Console.ReadLine());
+                        invoiceService.PayInvoice(InvoiceId);
                     }
                     break;
                 case (int)Menu.CreateWallet:
@@ -411,6 +416,7 @@ while (isContinue)
                         discountService.CreateDiscount(discount);
                     }
                     break;
+       
             }
         }
     }
