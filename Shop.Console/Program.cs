@@ -26,11 +26,11 @@ productService.ShowAll("user");
 
 while (isContinue)
 {
-    if (SessionId == 0 && Role==string.Empty)
+    if (SessionId == 0 && Role == string.Empty)
     {
-        Console.WriteLine("1 - Login User\n"+ "2 - Register User");
+        Console.WriteLine("1 - Login User\n" + "2 - Register User");
     }
-    if (SessionId>0 && Role=="user")
+    if (SessionId > 0 && Role == "user")
     {
         Console.WriteLine("-- Shop area--\n" +
    "3 - Show all Categories\n" +
@@ -44,19 +44,23 @@ while (isContinue)
    "9 - Create Invoice\n" +
    "10 - Show Invoices\n" +
    "11 - Pay Invoice\n" +
-   "12 - Create Wallet");
+   "12 - Create Wallet\n" +
+   "26 - Search Product\n" +
+   "27 - Cixis");
     }
-    if(SessionId>0  && Role=="admin")
+    if (SessionId > 0 && Role == "admin")
     {
         Console.WriteLine("-- Admin area--\n");
-        Console.WriteLine("-- Categories--\n"+
-        "3-Show all Categories\n"+ "14-Create Category\n"+"15-Update Category\n"+"16-Delete Category\n");
+        Console.WriteLine("-- Categories--\n" +
+        "3-Show all Categories\n" + "14-Create Category\n" + "15-Update Category\n" + "16-Delete Category\n");
         Console.WriteLine("-- Brands--\n" +
         "4-Show all Brands\n" + "17-Create Brand\n" + "18-Update Brand\n" + "19-Delete Brand\n");
         Console.WriteLine("-- Products--\n" +
         "5-Show all Product\n" + "20-Create Product\n" + "21-Update Product\n" + "22-Delete Product\n");
         Console.WriteLine("-- Discounts--\n" +
         "23-Show all Discounts\n" + "24-Create Discount\n");
+        Console.WriteLine("13 - Search Product");
+        Console.WriteLine("14 - Cixis");
     }
 
     string? option = Console.ReadLine();
@@ -69,9 +73,9 @@ while (isContinue)
         {
             switch (optionNumber)
             {
-                    case (int)Menu.LoginUser:
+                case (int)Menu.LoginUser:
                     Console.WriteLine("Enter User Name:");
-                     string userName = Console.ReadLine();
+                    string userName = Console.ReadLine();
                     Console.WriteLine("Enter Password:");
                     string password = Console.ReadLine();
                     if (userService.UserLogin(userName, password))
@@ -80,11 +84,11 @@ while (isContinue)
                         SessionId = userService.GetUserId(userName, password);
                         Role = userService.GetUserRole(SessionId);
                     }
-                    else 
-                    { 
+                    else
+                    {
                         Console.WriteLine("Belə istifadəçi yoxdur");
                     }
-                   
+
                     break;
                 case (int)Menu.RegisterUser:
                     Console.WriteLine("Enter User Name:");
@@ -102,7 +106,7 @@ while (isContinue)
                     Console.WriteLine("Enter Phone:");
                     string phone = Console.ReadLine();
 
-                    
+
                     var user = new User
                     {
                         UserName = userRegName,
@@ -127,7 +131,7 @@ while (isContinue)
                     break;
 
                 case (int)Menu.ShowAllWallets:
-                    if(SessionId==0)
+                    if (SessionId == 0)
                     {
                         Console.WriteLine("Ilk once login olun");
                     }
@@ -149,7 +153,7 @@ while (isContinue)
 
                         Console.WriteLine("Zenbile atmaq istediyiniz mehsulun sayini secin");
                         int Quantity = Convert.ToInt32(Console.ReadLine());
-                        basketProductService.AddBasketProduct(ProductId,Quantity,SessionId);
+                        basketProductService.AddBasketProduct(ProductId, Quantity, SessionId);
                     }
                     break;
                 case (int)Menu.ShowBasket:
@@ -181,7 +185,7 @@ while (isContinue)
                         {
                             UserId = SessionId,
                             WalletId = walletId,
-                            PaymentMethod= PaymentMethod
+                            PaymentMethod = PaymentMethod
                         };
                         invoiceService.CreateInvoice(invoice);
                     }
@@ -206,7 +210,7 @@ while (isContinue)
                     {
                         invoiceService.GetInovicesByUserId(SessionId);
                         Console.WriteLine("odemek istediyiniz invoice id-ni daxil edin");
-                        int InvoiceId=Convert.ToInt32(Console.ReadLine());
+                        int InvoiceId = Convert.ToInt32(Console.ReadLine());
                         invoiceService.PayInvoice(InvoiceId);
                     }
                     break;
@@ -224,7 +228,7 @@ while (isContinue)
                         Console.WriteLine("Card number daxil edin");
                         wallet.CardNumber = Convert.ToInt64(Console.ReadLine());
                         Console.WriteLine("Balansı daxil edin");
-                        wallet.Balance=Convert.ToDecimal(Console.ReadLine());
+                        wallet.Balance = Convert.ToDecimal(Console.ReadLine());
                         walletService.CreateWallet(wallet);
                     }
                     break;
@@ -237,9 +241,9 @@ while (isContinue)
                     else
                     {
                         Console.WriteLine("Kateqoriya adini daxil edin");
-                        Category category = new ();
+                        Category category = new();
                         category.Name = Console.ReadLine();
-                        
+
                         categoryService.CreateCategory(category);
                     }
                     break;
@@ -250,9 +254,9 @@ while (isContinue)
                     }
                     else
                     {
-                        Category category = new ();
+                        Category category = new();
                         Console.WriteLine("Id ni daxil edin");
-                        category.Id=Convert.ToInt32(Console.ReadLine());
+                        category.Id = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Kateqoriya adini daxil edin");
                         category.Name = Console.ReadLine();
                         categoryService.UpdateCategory(category);
@@ -266,7 +270,7 @@ while (isContinue)
                     else
                     {
                         Console.WriteLine("Id ni daxil edin");
-                        int CategoryId = Convert.ToInt32(Console.ReadLine()); 
+                        int CategoryId = Convert.ToInt32(Console.ReadLine());
                         categoryService.DeleteCategory(CategoryId);
                     }
                     break;
@@ -416,7 +420,34 @@ while (isContinue)
                         discountService.CreateDiscount(discount);
                     }
                     break;
-       
+                case (int)Menu.SearchProduct:
+
+                    Product searchProduct = new();
+                    Console.WriteLine("Kateqoriya  daxil edin");
+                    categoryService.ShowAll(Role);
+                    int categoryId;
+                    int brandId;
+                    string productName;
+                    if (int.TryParse(Console.ReadLine(), out categoryId))
+                    {
+                        searchProduct.CategoryId = categoryId;
+                    }
+                    Console.WriteLine("Brend  daxil edin");
+                    brandService.ShowAll(Role);
+                    if (int.TryParse(Console.ReadLine(), out brandId))
+                    {
+                        searchProduct.BrandId = brandId;
+                    }
+                    Console.WriteLine("Adi daxil edin");
+                    searchProduct.Name = Console.ReadLine();
+                    productService.Search(searchProduct);
+
+                    break;
+                case (int)Menu.Exit:
+                    SessionId = 0;
+                    Role = string.Empty;
+                    Environment.Exit(0);
+                    break;
             }
         }
     }

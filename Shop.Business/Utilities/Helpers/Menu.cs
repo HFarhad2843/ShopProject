@@ -28,5 +28,9 @@ public enum Menu
 
     ShowDiscounts=23,
     CreateDiscount=24,
-    DeleteDiscount=25
+    DeleteDiscount=25,
+    
+        SearchProduct=26,
+        Exit=27
+
 }

@@ -2,6 +2,7 @@
 using Shop.Business.Interfaces;
 using Shop.Core.Entities;
 using Shop.DataAccess.DataAccess;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services;
 
@@ -78,5 +79,36 @@ public class ProductService:IProductService
             appDbContext.SaveChanges();
             Console.WriteLine("product silindi");
         }
+    }
+
+    public void Search(Product product)
+    { 
+        List<Product> products = appDbContext.products.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Discount).ToList();
+
+        if (product.CategoryId != null && product.CategoryId!=0)
+        {
+            products = products.Where(x => x.CategoryId == product.CategoryId).ToList();
+        }
+
+        if (product.BrandId != null && product.BrandId!=0)
+        {
+            products = products.Where(x => x.BrandId == product.BrandId).ToList();
+        }
+
+        if (product.Name != null)
+        {
+            products = products.Where(x => x.Name == product.Name).ToList();
+        }
+        Console.WriteLine("Mehsullar");
+
+        foreach (var item in products)
+        {
+            Console.WriteLine("Id: " + item.Id + " Name: " + item.Name + " Category: " + item.Category.Name + " Brand: " + item.Brand.Name + " Price: " + item.Price + " Quantity: " + item.Quantity);
+            if (item.Discount != null)
+            {
+                Console.WriteLine("Endrim" + item.Discount.Name + " Endrim faizi: " + item.Discount.DiscountPercent);
+            }
+        }
+
     }
 }
