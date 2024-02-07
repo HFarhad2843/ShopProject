@@ -12,20 +12,20 @@ public class InvoiceService : IInvoiceService
     {
         List<BasketProduct> basketProducts = new List<BasketProduct>();
         List<int> productIds = new List<int>();
-        basketProducts=appDbContext.basketproducts.Include(x=>x.Product).Where(x=>x.Basket.UserId== invoice.UserId && x.IsDeleted==false).ToList();
-        decimal TotalPrice = 0;
-        decimal initialPrice = 0;
-        decimal calculatedDiscount = 0;
-        decimal calculatedPrice = 0;
+        basketProducts=appDbContext.basketproducts.Include(x=>x.Product).ThenInclude(x=>x.Discount).Where(x=>x.Basket.UserId== invoice.UserId && x.IsDeleted==false).ToList();
+        decimal TotalPrice = 0; //toplam qiymet
+        decimal initialPrice = 0; //ilkin qiymet
+        decimal calculatedDiscount = 0; //hesablanmis endrim
+        decimal calculatedPrice = 0; //hesablanmis son qiymet
 
         foreach (BasketProduct basketProductDetail in basketProducts)
         {
             initialPrice = basketProductDetail.Product.Price;
 
-            if (basketProductDetail.Product.Discount!=null)
+            if (basketProductDetail.Product.Discount!=null) //endrim yoxlayir
             {
-                calculatedDiscount =  initialPrice * basketProductDetail.Product.Discount.DiscountPercent / 100;
-                calculatedPrice = (initialPrice - calculatedDiscount)*basketProductDetail.ProductQuantity;
+                calculatedDiscount =  initialPrice * basketProductDetail.Product.Discount.DiscountPercent / 100; //faize uygun endrim miqdari hesablayir
+                calculatedPrice = (initialPrice - calculatedDiscount)*basketProductDetail.ProductQuantity; //ilkin qiymetden endrimli qiymeti cixir sayina vurur son qiymeti hesablayir 
                 TotalPrice += calculatedPrice; 
             }
             else
@@ -35,11 +35,11 @@ public class InvoiceService : IInvoiceService
             }
         }
 
-        invoice.TotalPrice = TotalPrice;
+        invoice.TotalPrice = TotalPrice; //umumi qiymeti invoice deyerine yazir
         invoice.InvoiceStatus = 1; //yeni yaradilmis invoice statusu
         appDbContext.invoices.Add(invoice);
         appDbContext.SaveChanges();
-        foreach (BasketProduct basketProduct in basketProducts)
+        foreach (BasketProduct basketProduct in basketProducts) //zenbildeki mehsullari product invoice tablena yazir
         {
             ProductInvoice productInvoice = new ();
             productInvoice.ProductId = basketProduct.ProductId;
@@ -76,9 +76,9 @@ public class InvoiceService : IInvoiceService
         }
         
     }
-    public void ClearBasket(int userId)
+    public void ClearBasket(int userId) //zenbili temizleyir
     {
-        Basket basket = appDbContext.baskets.FirstOrDefault(x => x.UserId == userId);
+        Basket basket = appDbContext.baskets.Where(x => x.IsDeleted == false).FirstOrDefault(x => x.UserId == userId);
         if (basket != null)
         {
             basket.IsDeleted = true;
@@ -93,7 +93,7 @@ public class InvoiceService : IInvoiceService
         Console.WriteLine("Zenbil bosaldildi");
     }
 
-    public bool PaymentCheckout(int WalletId,decimal TotalPrice)
+    public bool PaymentCheckout(int WalletId,decimal TotalPrice)  //balansi yoxlayir
     {
         Wallet wallet= new Wallet();
         wallet = appDbContext.wallets.FirstOrDefault(x => x.Id == WalletId);
@@ -117,7 +117,7 @@ public class InvoiceService : IInvoiceService
             }
         }
     }
-    public void ChangeProductStockQuantity(int invoiceId)
+    public void ChangeProductStockQuantity(int invoiceId) //alinmis mehsullarin sayini azaldir
     {
         List<ProductInvoice> productInvoices = appDbContext.productsInvoices.Where(x => x.InvoiceId == invoiceId).ToList();
         foreach (var productInvoice in productInvoices)
@@ -128,7 +128,7 @@ public class InvoiceService : IInvoiceService
         appDbContext.SaveChanges();
         Console.WriteLine("mehsullarin stok sayi azaldildi");
     }
-    public void GetInovicesByUserId(int userId)
+    public void GetInovicesByUserId(int userId) //userin invoicelarini gosterir
     {
         List<Invoice>invoices = new List<Invoice>();
         invoices=appDbContext.invoices.Where(x=>x.UserId== userId).ToList();   

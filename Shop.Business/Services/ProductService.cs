@@ -106,7 +106,7 @@ public class ProductService:IProductService
             Console.WriteLine("Id: " + item.Id + " Name: " + item.Name + " Category: " + item.Category.Name + " Brand: " + item.Brand.Name + " Price: " + item.Price + " Quantity: " + item.Quantity);
             if (item.Discount != null)
             {
-                Console.WriteLine("Endrim" + item.Discount.Name + " Endrim faizi: " + item.Discount.DiscountPercent);
+                Console.WriteLine("Endrim " + item.Discount.Name + " Endrim faizi: " + item.Discount.DiscountPercent);
             }
         }
 

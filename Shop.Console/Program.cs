@@ -1,7 +1,6 @@
 ﻿using Shop.Business.Services;
 using Shop.Business.Utilities.Helpers;
 using Shop.Core.Entities;
-using System.Security.Principal;
 
 Console.WriteLine("Shop Project");
 Console.WriteLine();
@@ -18,10 +17,8 @@ BasketProductService basketProductService = new();
 InvoiceService invoiceService = new();
 DiscountService discountService = new();
 bool isContinue = true;
-const string guestMessage = "Siz login olmamisiniz.Yalniz mehsullara baxis kecire bilersiniz.Mehsullarin endrimleri mehsullar haqqindaki melumatin asagisinda yerlesir.Mehsullar uzerinde alish verish etmek ucun login olmalisiz.Sade user kimi login olmaq ucun 1 admin useri kimi login olmaq ucun 2 duymesini secin";
 Console.WriteLine();
 Console.WriteLine("Mehsullar");
-Console.WriteLine(guestMessage);
 productService.ShowAll("user");
 
 while (isContinue)
@@ -60,7 +57,7 @@ while (isContinue)
         Console.WriteLine("-- Discounts--\n" +
         "23-Show all Discounts\n" + "24-Create Discount\n");
         Console.WriteLine("13 - Search Product");
-        Console.WriteLine("14 - Cixis");
+        Console.WriteLine("27 - Cixis");
     }
 
     string? option = Console.ReadLine();

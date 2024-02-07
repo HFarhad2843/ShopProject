@@ -22,7 +22,7 @@ public class BasketProductService : IBasketProductService
             throw new Exception("Bu məhsuldan siz istediyiniz sayda  stokda yoxdur.");
         }
 
-        Basket basket=appDbContext.baskets.Where(x=>x.UserId== UserId).FirstOrDefault();
+        Basket basket = appDbContext.baskets.Where(x => x.UserId == UserId).Where(x => x.IsDeleted == false).FirstOrDefault();
         BasketProduct basketProduct = new BasketProduct();
         basketProduct.ProductId = ProductId;
         basketProduct.ProductQuantity = Quantity;
