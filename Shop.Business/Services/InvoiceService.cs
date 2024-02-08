@@ -12,7 +12,7 @@ public class InvoiceService : IInvoiceService
     {
         List<BasketProduct> basketProducts = new List<BasketProduct>();
         List<int> productIds = new List<int>();
-        basketProducts=appDbContext.basketproducts.Include(x=>x.Product).ThenInclude(x=>x.Discount).Where(x=>x.Basket.UserId== invoice.UserId && x.IsDeleted==false).ToList();
+        basketProducts=appDbContext.basketproducts.Include(x=>x.Product).ThenInclude(x=>x.Discount).Where(x=>x.Basket.UserId== invoice.UserId && x.Basket.IsDeleted==false).ToList();
         decimal TotalPrice = 0; //toplam qiymet
         decimal initialPrice = 0; //ilkin qiymet
         decimal calculatedDiscount = 0; //hesablanmis endrim
@@ -112,6 +112,7 @@ public class InvoiceService : IInvoiceService
             else
             {
                 wallet.Balance -= TotalPrice;
+                appDbContext.Update(wallet);
                 appDbContext.SaveChanges();
                 return true;
             }

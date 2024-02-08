@@ -23,35 +23,7 @@ public class AppDbContext:DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //// User Configuration
-        //modelBuilder.Entity<User>()
-        //    .Property(user => user.UserName).IsRequired();
-        //modelBuilder.Entity<User>()
-        //    .Property(user => user.UserSurname).IsRequired();
-        //modelBuilder.Entity<User>()
-        //    .Property(user => user.Email).IsRequired().HasMaxLength(255).IsUnicode(false);
-        //modelBuilder.Entity<User>()
-        //    .Property(user => user.Password).IsRequired().HasMaxLength(255).IsUnicode(false);
-        //modelBuilder.Entity<User>()
-        //    .Property(user => user.Phone).IsRequired().HasMaxLength(20).IsUnicode(false);
-
-        //// Wallet Configuration
-        //modelBuilder.Entity<Wallet>()
-        //    .Property(wallet => wallet.CardName).IsRequired().HasMaxLength(100);
-        //modelBuilder.Entity<Wallet>()
-        //    .Property(wallet => wallet.CardNumber).IsRequired();
-        //modelBuilder.Entity<Wallet>()
-        //    .Property(wallet => wallet.Balance).IsRequired();
-        //modelBuilder.Entity<Wallet>()
-        //    .Property(wallet => wallet.UserId).IsRequired();
-
-        //// Relationship with User
-        //modelBuilder.Entity<Wallet>()
-        //    .HasOne(wallet => wallet.User)
-        //    .WithMany(user => user.Wallets)
-        //    .HasForeignKey(wallet => wallet.UserId)
-        //    .OnDelete(DeleteBehavior.Restrict);
-        // Configure Basket entity
+        
         modelBuilder.Entity<Basket>()
             .HasOne(b => b.User)
             .WithMany(u => u.Baskets)
